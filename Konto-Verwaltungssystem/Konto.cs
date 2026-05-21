@@ -27,8 +27,11 @@ namespace Konto_Verwaltungssystem
 
         public decimal GetSaldo()
         {
+            Console.WriteLine(this._saldo);
             return this._saldo;
         }
+
+        public abstract void MonatlicheAbrechnung();
 
     }
 }

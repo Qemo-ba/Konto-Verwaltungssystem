@@ -4,7 +4,12 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            Privatkonto privatkonto = new Privatkonto("123456789");
+            privatkonto.Einzahlen(1000);
+            privatkonto.GetSaldo();
+            privatkonto.MonatlicheAbrechnung();
+            Console.WriteLine("Monatliche Abrechnung durchgeführt...");
+            privatkonto.GetSaldo();
         }
     }
 }

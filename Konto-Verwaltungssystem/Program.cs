@@ -10,6 +10,7 @@
             privatkonto.MonatlicheAbrechnung();
             Console.WriteLine("Monatliche Abrechnung durchgeführt...");
             privatkonto.GetSaldo();
+            Console.WriteLine("Kontonummer: {0}", privatkonto.Kontonummer);
         }
     }
 }

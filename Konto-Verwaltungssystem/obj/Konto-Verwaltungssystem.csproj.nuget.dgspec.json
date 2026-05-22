@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\qemal\\source\\repos\\Qemo-ba\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem.csproj": {}
+    "C:\\Users\\qemal\\source\\repos\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem.csproj": {}
   },
   "projects": {
-    "C:\\Users\\qemal\\source\\repos\\Qemo-ba\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem.csproj": {
+    "C:\\Users\\qemal\\source\\repos\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\qemal\\source\\repos\\Qemo-ba\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem.csproj",
+        "projectUniqueName": "C:\\Users\\qemal\\source\\repos\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem.csproj",
         "projectName": "Konto-Verwaltungssystem",
-        "projectPath": "C:\\Users\\qemal\\source\\repos\\Qemo-ba\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem.csproj",
+        "projectPath": "C:\\Users\\qemal\\source\\repos\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem.csproj",
         "packagesPath": "C:\\Users\\qemal\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\qemal\\source\\repos\\Qemo-ba\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem\\obj\\",
+        "outputPath": "C:\\Users\\qemal\\source\\repos\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\qemal\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

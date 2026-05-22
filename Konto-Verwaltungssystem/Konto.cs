@@ -18,7 +18,7 @@ namespace Konto_Verwaltungssystem
         {
             if (betrag > 0)
             {
-                this._saldo += betrag;
+                _saldo += betrag;
             } else
             {
                 Console.WriteLine("Warnung: Der Betrag ist negativ. Die Einzahlung wurde unterbrochen.");
@@ -27,9 +27,9 @@ namespace Konto_Verwaltungssystem
 
         public void Auszahlen(decimal betrag)
         {
-            if (betrag > 0)
+            if (betrag > 0 && betrag <= _saldo)
             {
-                this._saldo -= betrag;
+                _saldo -= betrag;
             } else
             {
                 Console.WriteLine("Warnung: Der Betrag ist negativ. Die Auszahlung wurde unterbrochen.");
@@ -38,8 +38,7 @@ namespace Konto_Verwaltungssystem
 
         public decimal GetSaldo()
         {
-            Console.WriteLine(this._saldo);
-            return this._saldo;
+            return _saldo;
         }
 
         public abstract void MonatlicheAbrechnung();

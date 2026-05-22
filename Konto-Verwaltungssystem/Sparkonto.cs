@@ -8,7 +8,11 @@ namespace Konto_Verwaltungssystem
     {
         public Sparkonto(string kontonummer) : base(kontonummer) { }
 
-        public override void MonatlicheAbrechnung() { }
+        public override void MonatlicheAbrechnung() 
+        {
+            decimal gebuehr = GetSaldo() * 0.025m;
+            Einzahlen(gebuehr);
+        }
         
     }
 }

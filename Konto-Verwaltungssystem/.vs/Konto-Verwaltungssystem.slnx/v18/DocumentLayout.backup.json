@@ -1,26 +1,26 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\qemal\\source\\repos\\Qemo-ba\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem\\",
+  "WorkspaceRootPath": "C:\\Users\\qemal\\source\\repos\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2009A1AB-5288-EF1E-AFA7-C0194E6D53A1}|Konto-Verwaltungssystem.csproj|c:\\users\\qemal\\source\\repos\\qemo-ba\\konto-verwaltungssystem\\konto-verwaltungssystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{2009A1AB-5288-EF1E-AFA7-C0194E6D53A1}|Konto-Verwaltungssystem.csproj|c:\\users\\qemal\\source\\repos\\konto-verwaltungssystem\\konto-verwaltungssystem\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2009A1AB-5288-EF1E-AFA7-C0194E6D53A1}|Konto-Verwaltungssystem.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2009A1AB-5288-EF1E-AFA7-C0194E6D53A1}|Konto-Verwaltungssystem.csproj|c:\\users\\qemal\\source\\repos\\qemo-ba\\konto-verwaltungssystem\\konto-verwaltungssystem\\privatkonto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2009A1AB-5288-EF1E-AFA7-C0194E6D53A1}|Konto-Verwaltungssystem.csproj|solutionrelative:privatkonto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2009A1AB-5288-EF1E-AFA7-C0194E6D53A1}|Konto-Verwaltungssystem.csproj|c:\\users\\qemal\\source\\repos\\konto-verwaltungssystem\\konto-verwaltungssystem\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2009A1AB-5288-EF1E-AFA7-C0194E6D53A1}|Konto-Verwaltungssystem.csproj|solutionrelative:user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2009A1AB-5288-EF1E-AFA7-C0194E6D53A1}|Konto-Verwaltungssystem.csproj|c:\\users\\qemal\\source\\repos\\qemo-ba\\konto-verwaltungssystem\\konto-verwaltungssystem\\sparkonto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{2009A1AB-5288-EF1E-AFA7-C0194E6D53A1}|Konto-Verwaltungssystem.csproj|c:\\users\\qemal\\source\\repos\\konto-verwaltungssystem\\konto-verwaltungssystem\\sparkonto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2009A1AB-5288-EF1E-AFA7-C0194E6D53A1}|Konto-Verwaltungssystem.csproj|solutionrelative:sparkonto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2009A1AB-5288-EF1E-AFA7-C0194E6D53A1}|Konto-Verwaltungssystem.csproj|c:\\users\\qemal\\source\\repos\\qemo-ba\\konto-verwaltungssystem\\konto-verwaltungssystem\\konto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2009A1AB-5288-EF1E-AFA7-C0194E6D53A1}|Konto-Verwaltungssystem.csproj|solutionrelative:konto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2009A1AB-5288-EF1E-AFA7-C0194E6D53A1}|Konto-Verwaltungssystem.csproj|c:\\users\\qemal\\source\\repos\\konto-verwaltungssystem\\konto-verwaltungssystem\\privatkonto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2009A1AB-5288-EF1E-AFA7-C0194E6D53A1}|Konto-Verwaltungssystem.csproj|solutionrelative:privatkonto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2009A1AB-5288-EF1E-AFA7-C0194E6D53A1}|Konto-Verwaltungssystem.csproj|c:\\users\\qemal\\source\\repos\\qemo-ba\\konto-verwaltungssystem\\konto-verwaltungssystem\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2009A1AB-5288-EF1E-AFA7-C0194E6D53A1}|Konto-Verwaltungssystem.csproj|solutionrelative:user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2009A1AB-5288-EF1E-AFA7-C0194E6D53A1}|Konto-Verwaltungssystem.csproj|c:\\users\\qemal\\source\\repos\\konto-verwaltungssystem\\konto-verwaltungssystem\\konto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2009A1AB-5288-EF1E-AFA7-C0194E6D53A1}|Konto-Verwaltungssystem.csproj|solutionrelative:konto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -98,39 +98,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Konto.cs",
-              "DocumentMoniker": "C:\\Users\\qemal\\source\\repos\\Qemo-ba\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem\\Konto.cs",
-              "RelativeDocumentMoniker": "Konto.cs",
-              "ToolTip": "C:\\Users\\qemal\\source\\repos\\Qemo-ba\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem\\Konto.cs",
-              "RelativeToolTip": "Konto.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAgwBwAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-21T09:31:21.708Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
               "Title": "Sparkonto.cs",
-              "DocumentMoniker": "C:\\Users\\qemal\\source\\repos\\Qemo-ba\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem\\Sparkonto.cs",
+              "DocumentMoniker": "C:\\Users\\qemal\\source\\repos\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem\\Sparkonto.cs",
               "RelativeDocumentMoniker": "Sparkonto.cs",
-              "ToolTip": "C:\\Users\\qemal\\source\\repos\\Qemo-ba\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem\\Sparkonto.cs",
+              "ToolTip": "C:\\Users\\qemal\\source\\repos\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem\\Sparkonto.cs",
               "RelativeToolTip": "Sparkonto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-21T09:32:04.685Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Privatkonto.cs",
-              "DocumentMoniker": "C:\\Users\\qemal\\source\\repos\\Qemo-ba\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem\\Privatkonto.cs",
+              "DocumentMoniker": "C:\\Users\\qemal\\source\\repos\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem\\Privatkonto.cs",
               "RelativeDocumentMoniker": "Privatkonto.cs",
-              "ToolTip": "C:\\Users\\qemal\\source\\repos\\Qemo-ba\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem\\Privatkonto.cs",
+              "ToolTip": "C:\\Users\\qemal\\source\\repos\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem\\Privatkonto.cs",
               "RelativeToolTip": "Privatkonto.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAuwA8AAAAyAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-21T09:31:41.005Z",
               "EditorCaption": ""
@@ -138,24 +125,38 @@
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\Users\\qemal\\source\\repos\\Qemo-ba\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem\\User.cs",
-              "RelativeDocumentMoniker": "User.cs",
-              "ToolTip": "C:\\Users\\qemal\\source\\repos\\Qemo-ba\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem\\User.cs",
-              "RelativeToolTip": "User.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAjAAAAAAAAAA==",
+              "Title": "Konto.cs",
+              "DocumentMoniker": "C:\\Users\\qemal\\source\\repos\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem\\Konto.cs",
+              "RelativeDocumentMoniker": "Konto.cs",
+              "ToolTip": "C:\\Users\\qemal\\source\\repos\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem\\Konto.cs",
+              "RelativeToolTip": "Konto.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAQwA8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-21T09:31:04.305Z"
+              "WhenOpened": "2026-05-21T09:31:21.708Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\qemal\\source\\repos\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem\\User.cs",
+              "RelativeDocumentMoniker": "User.cs",
+              "ToolTip": "C:\\Users\\qemal\\source\\repos\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem\\User.cs",
+              "RelativeToolTip": "User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-21T09:31:04.305Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\qemal\\source\\repos\\Qemo-ba\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\qemal\\source\\repos\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\qemal\\source\\repos\\Qemo-ba\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem\\Program.cs",
+              "ToolTip": "C:\\Users\\qemal\\source\\repos\\Konto-Verwaltungssystem\\Konto-Verwaltungssystem\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAiwAsAAAAjAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-21T09:30:15.221Z",
               "EditorCaption": ""

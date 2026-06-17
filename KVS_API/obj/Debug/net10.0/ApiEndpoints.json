@@ -1,0 +1,70 @@
+[
+  {
+    "ContainingType": "KVS_API.Controllers.KontoController",
+    "Method": "ErstelleUser",
+    "RelativePath": "api/konto/erstelle-user",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KVS_API.Controllers.KontoController",
+    "Method": "HoleMeineKonten",
+    "RelativePath": "api/konto/meine-konten/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KVS_API.Controllers.KontoController",
+    "Method": "KontoEroeffnen",
+    "RelativePath": "api/konto/privatkonto-eroeffnen/{userId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KVS_API.Controllers.KontoController",
+    "Method": "SparkontoEroeffnen",
+    "RelativePath": "api/konto/sparkonto-eroeffnen/{userId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "KVS_API.Controllers.KontoController",
+    "Method": "TestUmbuchung",
+    "RelativePath": "api/konto/test-umbuchung",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]

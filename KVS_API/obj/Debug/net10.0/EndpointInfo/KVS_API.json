@@ -1,0 +1,112 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "KVS_API | v1",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5242"
+    }
+  ],
+  "paths": {
+    "/api/konto/erstelle-user": {
+      "get": {
+        "tags": [
+          "Konto"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/konto/test-umbuchung": {
+      "get": {
+        "tags": [
+          "Konto"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/konto/privatkonto-eroeffnen/{userId}": {
+      "post": {
+        "tags": [
+          "Konto"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/konto/sparkonto-eroeffnen/{userId}": {
+      "post": {
+        "tags": [
+          "Konto"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/konto/meine-konten/{userId}": {
+      "get": {
+        "tags": [
+          "Konto"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Konto"
+    }
+  ]
+}

@@ -20,13 +20,15 @@ namespace KVS_API.Models
         private string Passwordhash;
 
         [Column("erstelltam")]
-        public DateTime Erstelltam {  get; private set; } = DateTime.Now;
+        public DateTime Erstelltam { get; private set; } = DateTime.Now;
 
-        public ICollection<Konto> Konten {  get; private set; } = new List<Konto>();
+        public ICollection<Konto> Konten { get; private set; } = new List<Konto>();
 
-        public User(string username)
+        public User(string username, string email, string passwordhash)
         {
             this.Username = username;
+            this.Email = email;
+            this.Passwordhash = passwordhash;
         }
 
         public void KontoHinzufuegen(Konto neuesKonto)
@@ -37,15 +39,16 @@ namespace KVS_API.Models
         public void Umbuchen(Konto vonkonto, Konto nachkonto, decimal betrag)
         {
 
-            bool betragausbezahlt =  vonkonto.Auszahlen(betrag);
-            if (betragausbezahlt )
+            bool betragausbezahlt = vonkonto.Auszahlen(betrag);
+            if (betragausbezahlt)
             {
                 nachkonto.Einzahlen(betrag);
-            } else
+            }
+            else
             {
                 Console.WriteLine("Unbuchung wurde Unterbrochen");
             }
-            
+
         }
 
 

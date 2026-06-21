@@ -13,7 +13,7 @@ namespace KVS_API
             // Add services to the container.
 
             builder.Services.AddControllers();
-            
+
 
             builder.Services.AddOpenApi();
 
@@ -27,11 +27,11 @@ namespace KVS_API
                 options.AddPolicy("ErlaubeFrontend", policy =>
                 {
                     policy.WithOrigins("http://localhost:4200")
-                          .AllowAnyHeader()  
-                          .AllowAnyMethod(); 
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
                 });
             });
-            
+
 
             var app = builder.Build();
 

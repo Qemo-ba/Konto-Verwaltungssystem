@@ -12,8 +12,5 @@ namespace KVS_API.Controllers
         {
             this._context = context;
         }
-
-        [HttpGet("erstelle-user")]
-        public IActionResult ErstelleUser();
     }
 }

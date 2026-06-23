@@ -153,13 +153,42 @@ public class KontoService : IKontoService
         );
     }
 
-    public Task<UmbuchungResponse> UmbuchenAsync(string vonKontonummer, string nachKontonummer, decimal betrag)
+    public async Task<UmbuchungResponse> UmbuchenAsync(string vonKontonummer, string nachKontonummer, decimal betrag)
     {
-        throw new NotImplementedException();
+        var vonkonto = await _context.Konten.Where(k => k.Kontonummer == vonKontonummer).FirstOrDefaultAsync();
+        var nachkonto = await _context.Konten.Where(k => k.Kontonummer == nachKontonummer).FirstOrDefaultAsync();
+
+        var user = await _context.Users.FindAsync(vonkonto.UserId);
+        user.Umbuchen(vonkonto, nachkonto, betrag);
+        await _context.SaveChangesAsync();
+
+        return new UmbuchungResponse(
+            Erfolgreich: true,
+            Nachricht: $"Umbuchung von {betrag} CHF erfolgreich.",
+            NeuerSaldoVon: vonkonto.GetSaldo(),
+            NeuerSaldoNach: nachkonto.GetSaldo()
+        );
     }
 
-    public Task<KontoResponse> MonatlicheAbrechnungAsync(string kontonummer)
+    public async Task<KontoResponse> MonatlicheAbrechnungAsync(string kontonummer)
     {
-        throw new NotImplementedException();
+        var konto = await _context.Konten
+        .Where(k => k.Kontonummer == kontonummer)
+        .FirstOrDefaultAsync();
+
+        if (konto == null)
+        {
+            throw new KontoNotFoundException($"Das Konto mit der Kontonummer {kontonummer} existiert nicht.");
+        }
+        konto.MonatlicheAbrechnung();
+
+        await _context.SaveChangesAsync();
+
+        return new KontoResponse(
+            konto.Kontonummer,
+            konto.Typ,
+            konto.GetSaldo(),
+            konto.Erstelltam
+        );
     }
 }

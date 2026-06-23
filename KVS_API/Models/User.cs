@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-
+using KVS_API.Exceptions;
 namespace KVS_API.Models
 {
     public class User
@@ -37,15 +37,12 @@ namespace KVS_API.Models
         {
 
             bool betragausbezahlt = vonkonto.Auszahlen(betrag);
-            if (betragausbezahlt)
+            if (!betragausbezahlt)
             {
-                nachkonto.Einzahlen(betrag);
-            }
-            else
-            {
-                Console.WriteLine("Unbuchung wurde Unterbrochen");
+                throw new UnzureichendeDeckungException("Nicht genügend Deckung.");
             }
 
+            nachkonto.Einzahlen(betrag);
         }
 
 

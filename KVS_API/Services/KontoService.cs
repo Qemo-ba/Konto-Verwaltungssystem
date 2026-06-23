@@ -131,26 +131,26 @@ public class KontoService : IKontoService
             throw new KontoNotFoundException($"Das Konto mit der Kontonummer {kontonummer} existiert nicht.");
         }
 
-        if (betrag > 0 && betrag < konto.GetSaldo())
+        if (betrag <= 0)
         {
-            bool auszahlungerfolgreich = konto.Auszahlen(betrag);
-            if (auszahlungerfolgreich)
-            {
-                return new KontoResponse(
-                    konto.Kontonummer,
-                    konto.Typ,
-                    konto.GetSaldo(),
-                    konto.Erstelltam
-                );
-            }
-            else
-            {
-                throw
-            }
+            throw new UngueltigerBetragException("Der Betrag muss größer als 0 sein.");
         }
 
+        if (betrag > konto.GetSaldo())
+        {
+            throw new UnzureichendeDeckungException("Der Betrag muss kleiner als oder gleich dem Saldo sein.");
+        }
 
+        konto.Auszahlen(betrag);
 
+        await _context.SaveChangesAsync();
+
+        return new KontoResponse(
+            konto.Kontonummer,
+            konto.Typ,
+            konto.GetSaldo(),
+            konto.Erstelltam
+        );
     }
 
     public Task<UmbuchungResponse> UmbuchenAsync(string vonKontonummer, string nachKontonummer, decimal betrag)

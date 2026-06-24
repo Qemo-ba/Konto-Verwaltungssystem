@@ -158,7 +158,18 @@ public class KontoService : IKontoService
         var vonkonto = await _context.Konten.Where(k => k.Kontonummer == vonKontonummer).FirstOrDefaultAsync();
         var nachkonto = await _context.Konten.Where(k => k.Kontonummer == nachKontonummer).FirstOrDefaultAsync();
 
+        if (vonkonto == null || nachkonto == null)
+        {
+            throw new KontoNotFoundException("Eines der Konten wurde nicht gefunden.");
+        }
+
         var user = await _context.Users.FindAsync(vonkonto.UserId);
+
+        if (user == null)
+        {
+            throw new UserNotFoundException($"User mit ID '{vonkonto.UserId}' nicht gefunden.");
+        }
+
         user.Umbuchen(vonkonto, nachkonto, betrag);
         await _context.SaveChangesAsync();
 

@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Globalization;
+using KVS_API.Exceptions;
 
 namespace KVS_API.Models
 {
@@ -41,7 +42,7 @@ namespace KVS_API.Models
             }
             else
             {
-                Console.WriteLine("Warnung: Der Betrag ist negativ. Die Einzahlung wurde unterbrochen.");
+                throw new UngueltigerBetragException("Der Betrag ist ungültig");
             }
         }
 
@@ -54,7 +55,6 @@ namespace KVS_API.Models
             }
             else
             {
-                Console.WriteLine("Warnung: Ungenügende Deckung oder ungültiger Betrag.");
                 return false;
             }
         }

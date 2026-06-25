@@ -1,6 +1,7 @@
 
 using KVS_API.Models;
 using Microsoft.EntityFrameworkCore;
+using KVS_API.Services;
 
 namespace KVS_API
 {
@@ -22,6 +23,11 @@ namespace KVS_API
                 .EnableSensitiveDataLogging()
             );
 
+            builder.Services.AddHostedService<KVS_API.BackgroundServices.AbrechnungsService>();
+            builder.Services.AddScoped<IKontoService, KontoService>();
+            builder.Services.AddExceptionHandler<KVS_API.Middlewares.GlobalExceptionHandler>();
+            builder.Services.AddProblemDetails();
+
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("ErlaubeFrontend", policy =>
@@ -31,7 +37,6 @@ namespace KVS_API
                           .AllowAnyMethod();
                 });
             });
-
 
             var app = builder.Build();
 

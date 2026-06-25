@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using KVS_API.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace KVS_API.Controllers
 {
@@ -12,6 +13,17 @@ namespace KVS_API.Controllers
         {
             this._context = context;
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUser(Guid id)
+        {
+            var user = await _context.Users.FindAsync(id);
+
+            if (user == null) return NotFound("User nicht gefunden");
+
+            return Ok(new UserResponse(user.Id, user.Username, user.Email));
+        }
+
 
 
 

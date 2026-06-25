@@ -14,7 +14,7 @@ namespace KVS_API.Models
         public string Email { get; set; }
 
         [Column("passwordhash")]
-        private string Passwordhash;
+        public string Passwordhash { get; private set; }
 
         [Column("erstelltam")]
         public DateTime Erstelltam { get; private set; } = DateTime.Now;

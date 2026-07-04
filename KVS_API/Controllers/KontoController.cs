@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using KVS_API.Models;
 using KVS_API.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace KVS_API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/konto")]
     public class KontoController : ControllerBase

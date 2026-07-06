@@ -31,7 +31,7 @@ namespace KVS_API.Controllers
             _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
 
-            return Ok(new UserResponse(newUser.Id, newUser.Username, newUser.Email));
+            return Ok();
         }
 
         [HttpPost("login")]

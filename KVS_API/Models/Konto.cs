@@ -12,7 +12,7 @@ namespace KVS_API.Models
         public string Kontonummer { get; private set; }
 
         [Column("saldo")]
-        private decimal _saldo = 0;
+        public decimal Saldo { get; private set; } = 0;
 
         public virtual User User { get; set; }
 
@@ -22,7 +22,7 @@ namespace KVS_API.Models
         [Column("typ")]
         public string Typ { get; private set; }
         [Column("erstelltam")]
-        public DateTime Erstelltam { get; private set; } = DateTime.Now;
+        public DateTime Erstelltam { get; private set; } = DateTime.UtcNow;
 
         protected Konto(string typ, decimal anfangsbestand)
         {
@@ -30,7 +30,7 @@ namespace KVS_API.Models
             this.Kontonummer = GetKontonummer();
             if (anfangsbestand >= 0)
             {
-                this._saldo = anfangsbestand;
+                this.Saldo = anfangsbestand;
             }
         }
 
@@ -38,7 +38,7 @@ namespace KVS_API.Models
         {
             if (betrag > 0)
             {
-                _saldo += betrag;
+                Saldo += betrag;
             }
             else
             {
@@ -48,9 +48,9 @@ namespace KVS_API.Models
 
         public bool Auszahlen(decimal betrag)
         {
-            if (betrag > 0 && betrag <= _saldo)
+            if (betrag > 0 && betrag <= Saldo)
             {
-                _saldo -= betrag;
+                Saldo -= betrag;
                 return true;
             }
             else
@@ -61,7 +61,7 @@ namespace KVS_API.Models
 
         public decimal GetSaldo()
         {
-            return _saldo;
+            return Saldo;
         }
 
         private static string GetKontonummer()

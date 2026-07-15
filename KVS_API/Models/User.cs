@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations.Schema;
 using KVS_API.Exceptions;
 namespace KVS_API.Models
 {
@@ -17,7 +17,7 @@ namespace KVS_API.Models
         public string Passwordhash { get; private set; }
 
         [Column("erstelltam")]
-        public DateTime Erstelltam { get; private set; } = DateTime.Now;
+        public DateTime Erstelltam { get; private set; } = DateTime.UtcNow;
 
         public ICollection<Konto> Konten { get; private set; } = new List<Konto>();
 

@@ -64,6 +64,7 @@ namespace KVS_API
                 app.MapOpenApi();
             }
 
+            app.UseExceptionHandler();
             app.UseHttpsRedirection();
 
             app.UseCors("ErlaubeFrontend");

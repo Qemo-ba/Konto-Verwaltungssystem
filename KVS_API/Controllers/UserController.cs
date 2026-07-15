@@ -50,11 +50,10 @@ namespace KVS_API.Controllers
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
 
-            if (user == null) return Unauthorized("Wrong email or password");
-
-            bool passwortKorrekt = BCrypt.Net.BCrypt.Verify(request.Password, user.Passwordhash);
-
-            if (!passwortKorrekt) return Unauthorized("Wrong email or password");
+            if (user == null || !BCrypt.Net.BCrypt.Verify(request.Password, user.Passwordhash))
+            {
+                return Unauthorized(new { message = "Wrong email or password" });
+            }
 
             var token = GeneriereJwtToken(user);
 

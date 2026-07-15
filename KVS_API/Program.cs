@@ -58,6 +58,22 @@ namespace KVS_API
 
             var app = builder.Build();
 
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                try
+                {
+                    var context = services.GetRequiredService<ApplicationDbContext>();
+                    // Dieser Befehl wendet alle fehlenden Migrationen automatisch auf Supabase an:
+                    context.Database.Migrate();
+                    Console.WriteLine("--> Datenbank-Migration erfolgreich durchgeführt!");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"--> Fehler bei der Datenbank-Migration: {ex.Message}");
+                }
+            }
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {

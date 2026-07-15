@@ -16,7 +16,7 @@ namespace KVS_API.Middlewares
         public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
         {
             // 1. Den Fehler in der Konsole loggen (für dich als Entwickler wichtig)
-            _logger.LogError(exception, "Ein Fehler ist aufgetreten: {Message}", exception.Message);
+            _logger.LogError(exception, "An error occurred: {Message}", exception.Message);
 
             // 2. Ein standardisiertes Fehler-Objekt vorbereiten
             var problemDetails = new ProblemDetails
@@ -28,14 +28,14 @@ namespace KVS_API.Middlewares
             if (exception is KontoNotFoundException || exception is UserNotFoundException)
             {
                 httpContext.Response.StatusCode = StatusCodes.Status404NotFound;
-                problemDetails.Title = "Nicht gefunden";
+                problemDetails.Title = "Not found";
                 problemDetails.Detail = exception.Message;
                 problemDetails.Status = StatusCodes.Status404NotFound;
             }
             else if (exception is UngueltigerBetragException || exception is UnzureichendeDeckungException)
             {
                 httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
-                problemDetails.Title = "Ungültige Anfrage";
+                problemDetails.Title = "Bad request";
                 problemDetails.Detail = exception.Message;
                 problemDetails.Status = StatusCodes.Status400BadRequest;
             }
@@ -43,8 +43,8 @@ namespace KVS_API.Middlewares
             {
                 // Für alle anderen "echten" Abstürze (z. B. Datenbank down)
                 httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
-                problemDetails.Title = "Interner Serverfehler";
-                problemDetails.Detail = "Ein unerwarteter Fehler ist aufgetreten.";
+                problemDetails.Title = "Internal server error";
+                problemDetails.Detail = "An unexpected error occurred.";
                 problemDetails.Status = StatusCodes.Status500InternalServerError;
             }
 

@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.Extensions.Options;
 
 namespace KVS_API.Controllers
 {
@@ -21,8 +22,12 @@ namespace KVS_API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
+
+            var usernameExists = await _context.Users.AnyAsync(u => u.Username == request.Username);
+            if (usernameExists) return Conflict(new { field = "username", message = "This username already exists" });
+
             var emailExists = await _context.Users.AnyAsync(u => u.Email == request.Email);
-            if (emailExists) return BadRequest("Diese E-Mail-Adresse wird bereits verwendet.");
+            if (emailExists) return Conflict(new { field = "email", message = "This email already exists" });
 
             string passwortHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
 
@@ -31,7 +36,13 @@ namespace KVS_API.Controllers
             _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
 
-            return Ok();
+            var token = GeneriereJwtToken(newUser);
+
+            return Ok(new
+            {
+                Token = token,
+                User = new UserResponse(newUser.Id, newUser.Username, newUser.Email)
+            });
         }
 
         [HttpPost("login")]
@@ -39,11 +50,11 @@ namespace KVS_API.Controllers
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
 
-            if (user == null) return Unauthorized("Falsche E-Mail oder falsches Passwort.");
+            if (user == null) return Unauthorized("Wrong email or password");
 
             bool passwortKorrekt = BCrypt.Net.BCrypt.Verify(request.Password, user.Passwordhash);
 
-            if (!passwortKorrekt) return Unauthorized("Falsche E-Mail oder falsches Passwort.");
+            if (!passwortKorrekt) return Unauthorized("Wrong email or password");
 
             var token = GeneriereJwtToken(user);
 
@@ -59,7 +70,7 @@ namespace KVS_API.Controllers
         {
             var user = await _context.Users.FindAsync(id);
 
-            if (user == null) return NotFound("User nicht gefunden");
+            if (user == null) return NotFound("User not found");
 
             return Ok(new UserResponse(user.Id, user.Username, user.Email));
         }
@@ -67,7 +78,6 @@ namespace KVS_API.Controllers
 
         private string GeneriereJwtToken(User user)
         {
-            // Holt den geheimen Schlüssel aus der appsettings.json
             var configuration = HttpContext.RequestServices.GetRequiredService<IConfiguration>();
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]!));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -83,7 +93,7 @@ namespace KVS_API.Controllers
                 issuer: configuration["Jwt:Issuer"],
                 audience: configuration["Jwt:Audience"],
                 claims: claims,
-                expires: DateTime.Now.AddHours(2), // Token gilt 2 Stunden
+                expires: DateTime.Now.AddHours(2),
                 signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);

@@ -1,5 +1,3 @@
-using System;
-
 namespace KVS_API.Models
 {
     public record ErstelleKontoRequest(Guid UserId, string Typ);

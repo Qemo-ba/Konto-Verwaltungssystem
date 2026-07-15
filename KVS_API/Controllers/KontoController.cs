@@ -17,7 +17,7 @@ namespace KVS_API.Controllers
             _kontoService = kontoService;
         }
 
-        [HttpGet("getall/{userId:guid}")]
+        [HttpGet("getkonten/{userId:guid}")]
         public async Task<IActionResult> GetAlleKonten(Guid userId)
         {
             var konten = await _kontoService.GetAlleKontenAsync(userId);

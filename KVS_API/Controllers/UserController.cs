@@ -22,13 +22,6 @@ namespace KVS_API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
-
-            var usernameExists = await _context.Users.AnyAsync(u => u.Username == request.Username);
-            if (usernameExists) return Conflict(new { field = "username", message = "This username already exists" });
-
-            var emailExists = await _context.Users.AnyAsync(u => u.Email == request.Email);
-            if (emailExists) return Conflict(new { field = "email", message = "This email already exists" });
-
             string passwortHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
 
             var newUser = new User(request.Username, request.Email, passwortHash);
@@ -64,14 +57,18 @@ namespace KVS_API.Controllers
             });
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetUser(Guid id)
+        [HttpGet("check-username")]
+        public async Task<IActionResult> CheckUsername([FromQuery] string username)
         {
-            var user = await _context.Users.FindAsync(id);
+            var exists = await _context.Users.AnyAsync(u => u.Username == username);
+            return Ok(new { exists });
+        }
 
-            if (user == null) return NotFound("User not found");
-
-            return Ok(new UserResponse(user.Id, user.Username, user.Email));
+        [HttpGet("check-email")]
+        public async Task<IActionResult> CheckEmail([FromQuery] string email)
+        {
+            var exists = await _context.Users.AnyAsync(u => u.Email == email);
+            return Ok(new { exists });
         }
 
 

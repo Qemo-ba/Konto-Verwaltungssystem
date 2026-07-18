@@ -66,8 +66,16 @@ namespace KVS_API.Models
 
         private static string GetKontonummer()
         {
-            var region = new RegionInfo(CultureInfo.InstalledUICulture.Name);
-            var kontonummer = region.TwoLetterISORegionName + Guid.NewGuid().ToString().Substring(0, 8).ToUpper();
+            string regionCode = "CH";
+            try
+            {
+                var region = new RegionInfo(CultureInfo.InstalledUICulture.Name);
+                regionCode = region.TwoLetterISORegionName;
+            }
+            catch { }
+
+            var kontonummer = regionCode + Guid.NewGuid().ToString().Substring(0, 8).ToUpper();
+
             return kontonummer;
         }
 

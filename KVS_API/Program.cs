@@ -81,7 +81,7 @@ namespace KVS_API
             }
 
             app.UseExceptionHandler();
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseCors("ErlaubeFrontend");
 

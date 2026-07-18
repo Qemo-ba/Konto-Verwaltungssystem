@@ -58,6 +58,13 @@ public class KontoService : IKontoService
             throw new UserNotFoundException($"User mit ID '{userId}' nicht gefunden.");
         }
 
+        var anzahlKonten = await _context.Konten.CountAsync(k => k.UserId == userId);
+
+        if (anzahlKonten >= 6)
+        {
+            throw new MaxKontenErreichtException("Max Konten erreicht");
+        }
+
         var sparkonto = new Sparkonto();
 
         user.KontoHinzufuegen(sparkonto);
@@ -79,6 +86,13 @@ public class KontoService : IKontoService
         if (user == null)
         {
             throw new UserNotFoundException($"User mit ID '{userId}' nicht gefunden.");
+        }
+
+        var anzahlKonten = await _context.Konten.CountAsync(k => k.UserId == userId);
+
+        if (anzahlKonten >= 6)
+        {
+            throw new MaxKontenErreichtException("Max Konten erreicht");
         }
 
         var privatkonto = new Privatkonto();
@@ -201,5 +215,21 @@ public class KontoService : IKontoService
             konto.GetSaldo(),
             konto.Erstelltam
         );
+    }
+
+    public async Task KontoEntfernen(string kontonummer)
+    {
+        var konto = await _context.Konten
+        .Where(k => k.Kontonummer == kontonummer)
+        .FirstOrDefaultAsync();
+
+        if (konto == null)
+        {
+            throw new KontoNotFoundException($"Das Konto mit der Kontonummer {kontonummer} existiert nicht.");
+        }
+
+        _context.Remove(konto);
+        await _context.SaveChangesAsync();
+
     }
 }

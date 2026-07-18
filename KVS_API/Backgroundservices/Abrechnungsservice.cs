@@ -36,24 +36,34 @@ namespace KVS_API.BackgroundServices
 
                     // 3. Wir holen alle Konten aus der Datenbank
                     var konten = await dbContext.Konten.ToListAsync(stoppingToken);
+                    int abgerechnetCount = 0;
 
-                    // 4. Für jedes Konto die von dir geschriebene Methode ausführen
+                    // 4. Für jedes Konto prüfen, ob ein Monat vergangen ist
                     foreach (var konto in konten)
                     {
-                        konto.MonatlicheAbrechnung();
+                        var naechsteAbrechnung = konto.LetzteAbrechnung.AddMonths(1);
+                        if (DateTime.UtcNow >= naechsteAbrechnung)
+                        {
+                            konto.MonatlicheAbrechnung();
+                            konto.LetzteAbrechnung = naechsteAbrechnung;
+                            abgerechnetCount++;
+                        }
                     }
 
                     // 5. Alle Änderungen (neue Salden) in der DB speichern
-                    await dbContext.SaveChangesAsync(stoppingToken);
-
-                    _logger.LogInformation($"Monatliche Abrechnung für {konten.Count} Konten erfolgreich durchgeführt.");
+                    if (abgerechnetCount > 0)
+                    {
+                        await dbContext.SaveChangesAsync(stoppingToken);
+                        _logger.LogInformation($"Monatliche Abrechnung für {abgerechnetCount} Konten erfolgreich durchgeführt.");
+                    }
                 }
                 catch (Exception ex)
                 {
                     _logger.LogError(ex, "Fehler bei der monatlichen Abrechnung.");
                 }
 
-                await Task.Delay(TimeSpan.FromDays(30), stoppingToken);
+                // Jeden Tag prüfen
+                await Task.Delay(TimeSpan.FromDays(1), stoppingToken);
             }
         }
     }

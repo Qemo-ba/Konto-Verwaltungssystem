@@ -24,6 +24,9 @@ namespace KVS_API.Models
         [Column("erstelltam")]
         public DateTime Erstelltam { get; private set; } = DateTime.UtcNow;
 
+        [Column("letzteabrechnung")]
+        public DateTime LetzteAbrechnung { get; set; } = DateTime.UtcNow;
+
         protected Konto(string typ, decimal anfangsbestand)
         {
             this.Typ = typ;

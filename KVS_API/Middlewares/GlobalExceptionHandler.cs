@@ -32,7 +32,7 @@ namespace KVS_API.Middlewares
                 problemDetails.Detail = exception.Message;
                 problemDetails.Status = StatusCodes.Status404NotFound;
             }
-            else if (exception is UngueltigerBetragException || exception is UnzureichendeDeckungException)
+            else if (exception is UngueltigerBetragException || exception is UnzureichendeDeckungException || exception is MaxKontenErreichtException)
             {
                 httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
                 problemDetails.Title = "Bad request";

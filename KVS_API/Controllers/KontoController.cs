@@ -66,6 +66,12 @@ namespace KVS_API.Controllers
             return Ok(response);
         }
 
+        [HttpDelete("{kontonummer}")]
+        public async Task<IActionResult> KontoEntfernen(string kontonummer)
+        {
+            await _kontoService.KontoEntfernen(kontonummer);
+            return NoContent();
+        }
 
 
     }

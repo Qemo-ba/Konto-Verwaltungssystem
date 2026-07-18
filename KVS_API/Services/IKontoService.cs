@@ -13,7 +13,10 @@ public interface IKontoService
     Task<KontoResponse> EinzahlenAsync(string kontonummer, decimal betrag);
     Task<KontoResponse> AuszahlenAsync(string kontonummer, decimal betrag);
     Task<UmbuchungResponse> UmbuchenAsync(string vonKontonummer, string nachKontonummer, decimal betrag);
+    Task KontoEntfernen(string Kontonummer);
 
     Task<KontoResponse> MonatlicheAbrechnungAsync(string kontonummer);
+
+
 
 }

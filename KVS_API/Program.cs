@@ -35,7 +35,7 @@ namespace KVS_API
             {
                 options.AddPolicy("ErlaubeFrontend", policy =>
                 {
-                    policy.WithOrigins("http://localhost:4200", "https://kvs-murex.vercel.app/")
+                    policy.WithOrigins("http://localhost:4200", "https://kvs-murex.vercel.app")
                           .AllowAnyHeader()
                           .AllowAnyMethod();
                 });

@@ -63,7 +63,7 @@ namespace KVS_API.BackgroundServices
                 }
 
                 // Jeden Tag prüfen
-                await Task.Delay(TimeSpan.FromDays(1), stoppingToken);
+                await Task.Delay(TimeSpan.FromSeconds(30), stoppingToken);
             }
         }
     }

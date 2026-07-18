@@ -1,6 +1,0 @@
-@KVS_API_HostAddress = http://localhost:5242/api/konto
-
-GET {{KVS_API_HostAddress}}/erstelle-user
-Accept: application/json
-
-###

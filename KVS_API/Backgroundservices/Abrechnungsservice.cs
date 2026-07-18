@@ -41,7 +41,7 @@ namespace KVS_API.BackgroundServices
                     // 4. Für jedes Konto prüfen, ob ein Monat vergangen ist
                     foreach (var konto in konten)
                     {
-                        var naechsteAbrechnung = konto.LetzteAbrechnung.AddMonths(1);
+                        var naechsteAbrechnung = konto.LetzteAbrechnung.AddMinutes(1);
                         if (DateTime.UtcNow >= naechsteAbrechnung)
                         {
                             konto.MonatlicheAbrechnung();

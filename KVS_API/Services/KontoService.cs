@@ -228,7 +228,7 @@ public class KontoService : IKontoService
             throw new KontoNotFoundException($"Das Konto mit der Kontonummer {kontonummer} existiert nicht.");
         }
 
-        _context.Remove(konto);
+        _context.Konten.Remove(konto);
         await _context.SaveChangesAsync();
 
     }

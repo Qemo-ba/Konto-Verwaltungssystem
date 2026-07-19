@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("KVS_API.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3f28b8708455c2fa97e458f90542edcfe09cb2b6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+eb68ce869e6c0a7c2064087837f0258ee63e2a43")]
 [assembly: System.Reflection.AssemblyProductAttribute("KVS_API.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("KVS_API.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

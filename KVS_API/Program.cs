@@ -46,6 +46,17 @@ namespace KVS_API
                 });
             });
 
+            // Fail-fast: Fehlt der JWT-Key (z. B. Render-Env-Var 'Jwt__Key' nicht gesetzt),
+            // wuerde das Signieren spaeter mit einer kryptischen 500 scheitern. Lieber sofort
+            // beim Start mit einer klaren Meldung abbrechen. HMAC-SHA256 braucht >= 16 Byte.
+            var jwtKey = builder.Configuration["Jwt:Key"];
+            if (string.IsNullOrWhiteSpace(jwtKey) || Encoding.UTF8.GetByteCount(jwtKey) < 16)
+            {
+                throw new InvalidOperationException(
+                    "Jwt:Key fehlt oder ist zu kurz. Auf Render die Umgebungsvariable 'Jwt__Key' " +
+                    "(doppelter Unterstrich!) auf einen langen Zufallswert (mind. 16 Zeichen) setzen.");
+            }
+
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -57,7 +68,7 @@ namespace KVS_API
                         ValidateIssuerSigningKey = true,
                         ValidIssuer = builder.Configuration["Jwt:Issuer"],
                         ValidAudience = builder.Configuration["Jwt:Audience"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
                     };
                 });
 

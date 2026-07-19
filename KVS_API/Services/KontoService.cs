@@ -30,11 +30,14 @@ public class KontoService : IKontoService
         return responseliste;
     }
 
-    public async Task<KontoResponse> GetKontoAsync(string kontonummer)
+    public async Task<KontoResponse> GetKontoAsync(string kontonummer, Guid aktuellerUserId)
     {
         var konto = await _context.Konten.Where(k => k.Kontonummer == kontonummer).FirstOrDefaultAsync();
 
-        if (konto == null)
+        // Sicherheit: existiert das Konto nicht ODER gehört es einem anderen User,
+        // antworten wir bewusst identisch ("nicht gefunden"), damit fremde
+        // Kontonummern nicht durch Ausprobieren erraten werden koennen (404).
+        if (konto == null || konto.UserId != aktuellerUserId)
         {
             throw new KontoNotFoundException($"Das Konto mit der Kontonummer {kontonummer} existiert nicht.");
         }
@@ -110,11 +113,11 @@ public class KontoService : IKontoService
 
     }
 
-    public async Task<KontoResponse> EinzahlenAsync(string kontonummer, decimal betrag)
+    public async Task<KontoResponse> EinzahlenAsync(string kontonummer, decimal betrag, Guid aktuellerUserId)
     {
         var konto = await _context.Konten.Where(k => k.Kontonummer == kontonummer).FirstOrDefaultAsync();
 
-        if (konto == null)
+        if (konto == null || konto.UserId != aktuellerUserId)
         {
             throw new KontoNotFoundException($"Das Konto mit der Kontonummer {kontonummer} existiert nicht.");
         }
@@ -136,11 +139,11 @@ public class KontoService : IKontoService
         );
     }
 
-    public async Task<KontoResponse> AuszahlenAsync(string kontonummer, decimal betrag)
+    public async Task<KontoResponse> AuszahlenAsync(string kontonummer, decimal betrag, Guid aktuellerUserId)
     {
         var konto = await _context.Konten.Where(k => k.Kontonummer == kontonummer).FirstOrDefaultAsync();
 
-        if (konto == null)
+        if (konto == null || konto.UserId != aktuellerUserId)
         {
             throw new KontoNotFoundException($"Das Konto mit der Kontonummer {kontonummer} existiert nicht.");
         }
@@ -167,17 +170,20 @@ public class KontoService : IKontoService
         );
     }
 
-    public async Task<UmbuchungResponse> UmbuchenAsync(string vonKontonummer, string nachKontonummer, decimal betrag)
+    public async Task<UmbuchungResponse> UmbuchenAsync(string vonKontonummer, string nachKontonummer, decimal betrag, Guid aktuellerUserId)
     {
         var vonkonto = await _context.Konten.Where(k => k.Kontonummer == vonKontonummer).FirstOrDefaultAsync();
         var nachkonto = await _context.Konten.Where(k => k.Kontonummer == nachKontonummer).FirstOrDefaultAsync();
 
-        if (vonkonto == null || nachkonto == null)
+        // Beide Konten muessen dem eingeloggten User gehoeren, sonst koennte man
+        // Geld auf ein fremdes Konto (oder von einem fremden Konto) verschieben.
+        if (vonkonto == null || nachkonto == null
+            || vonkonto.UserId != aktuellerUserId || nachkonto.UserId != aktuellerUserId)
         {
             throw new KontoNotFoundException("Eines der Konten wurde nicht gefunden.");
         }
 
-        var user = await _context.Users.FindAsync(vonkonto.UserId);
+        var user = await _context.Users.FindAsync(aktuellerUserId);
 
         if (user == null)
         {
@@ -217,13 +223,13 @@ public class KontoService : IKontoService
         );
     }
 
-    public async Task KontoEntfernen(string kontonummer)
+    public async Task KontoEntfernen(string kontonummer, Guid aktuellerUserId)
     {
         var konto = await _context.Konten
         .Where(k => k.Kontonummer == kontonummer)
         .FirstOrDefaultAsync();
 
-        if (konto == null)
+        if (konto == null || konto.UserId != aktuellerUserId)
         {
             throw new KontoNotFoundException($"Das Konto mit der Kontonummer {kontonummer} existiert nicht.");
         }

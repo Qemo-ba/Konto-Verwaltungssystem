@@ -2,6 +2,7 @@
 using KVS_API.Models;
 using KVS_API.Services;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace KVS_API.Controllers
 {
@@ -17,60 +18,69 @@ namespace KVS_API.Controllers
             _kontoService = kontoService;
         }
 
-        [HttpGet("getkonten/{userId:guid}")]
-        public async Task<IActionResult> GetAlleKonten(Guid userId)
+        [HttpGet("getkonten")]
+        public async Task<IActionResult> GetAlleKonten()
         {
-            var konten = await _kontoService.GetAlleKontenAsync(userId);
+            var konten = await _kontoService.GetAlleKontenAsync(AktuellerUserId());
             return Ok(konten);
         }
 
         [HttpGet("{kontonummer}")]
         public async Task<IActionResult> GetKonto(string kontonummer)
         {
-            var konto = await _kontoService.GetKontoAsync(kontonummer);
+            var konto = await _kontoService.GetKontoAsync(kontonummer, AktuellerUserId());
             return Ok(konto);
         }
 
-        [HttpPost("sparkonto/{userId:guid}")]
-        public async Task<IActionResult> ErstelleSparkonto(Guid userId)
+        [HttpPost("sparkonto")]
+        public async Task<IActionResult> ErstelleSparkonto()
         {
-            var konto = await _kontoService.ErstelleSparkontoAsync(userId);
+            var konto = await _kontoService.ErstelleSparkontoAsync(AktuellerUserId());
             return Ok(konto);
         }
 
-        [HttpPost("privatkonto/{userId:guid}")]
-        public async Task<IActionResult> ErstellePrivatkonto(Guid userId)
+        [HttpPost("privatkonto")]
+        public async Task<IActionResult> ErstellePrivatkonto()
         {
-            var konto = await _kontoService.ErstellePrivatkontoAsync(userId);
+            var konto = await _kontoService.ErstellePrivatkontoAsync(AktuellerUserId());
             return Ok(konto);
         }
 
         [HttpPost("{kontonummer}/einzahlen")]
         public async Task<IActionResult> Einzahlen(string kontonummer, [FromBody] EinzahlenRequest request)
         {
-            var response = await _kontoService.EinzahlenAsync(kontonummer, request.Betrag);
+            var response = await _kontoService.EinzahlenAsync(kontonummer, request.Betrag, AktuellerUserId());
             return Ok(response);
         }
 
         [HttpPost("{kontonummer}/auszahlen")]
         public async Task<IActionResult> Auszahlen(string kontonummer, [FromBody] AuszahlenRequest request)
         {
-            var response = await _kontoService.AuszahlenAsync(kontonummer, request.Betrag);
+            var response = await _kontoService.AuszahlenAsync(kontonummer, request.Betrag, AktuellerUserId());
             return Ok(response);
         }
 
         [HttpPost("umbuchen")]
         public async Task<IActionResult> Umbuchen([FromBody] UmbuchenRequest request)
         {
-            var response = await _kontoService.UmbuchenAsync(request.VonKontonummer, request.NachKontonummer, request.Betrag);
+            var response = await _kontoService.UmbuchenAsync(request.VonKontonummer, request.NachKontonummer, request.Betrag, AktuellerUserId());
             return Ok(response);
         }
 
         [HttpDelete("{kontonummer}")]
         public async Task<IActionResult> KontoEntfernen(string kontonummer)
         {
-            await _kontoService.KontoEntfernen(kontonummer);
+            await _kontoService.KontoEntfernen(kontonummer, AktuellerUserId());
             return NoContent();
+        }
+
+        // Liest die User-ID aus dem signierten JWT (Claim "NameIdentifier").
+        // Das ist die einzige vertrauenswuerdige Quelle dafuer, wer der Aufrufer
+        // ist - im Gegensatz zu einer ID aus der URL, die jeder frei waehlen kann.
+        private Guid AktuellerUserId()
+        {
+            var id = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            return Guid.Parse(id!);
         }
 
 

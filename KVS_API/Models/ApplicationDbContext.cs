@@ -19,6 +19,11 @@ namespace KVS_API.Models
             modelBuilder.Entity<User>().ToTable("users");
             modelBuilder.Entity<Konto>().ToTable("konten");
 
+            // Sicherheitsnetz auf DB-Ebene: keine doppelten E-Mails / Usernamen,
+            // selbst wenn zwei Registrierungen die App-Pruefung gleichzeitig passieren.
+            modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
+            modelBuilder.Entity<User>().HasIndex(u => u.Username).IsUnique();
+
             modelBuilder.Entity<Konto>()
                 .HasDiscriminator<string>(k => k.Typ)
                 .HasValue<Privatkonto>("Privatkonto")

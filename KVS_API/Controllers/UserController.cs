@@ -22,6 +22,17 @@ namespace KVS_API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
+            // Fruehe, klare Rueckmeldung statt eines DB-Absturzes (500) bei Dubletten.
+            if (await _context.Users.AnyAsync(u => u.Email == request.Email))
+            {
+                return Conflict(new { message = "Diese E-Mail ist bereits registriert." });
+            }
+
+            if (await _context.Users.AnyAsync(u => u.Username == request.Username))
+            {
+                return Conflict(new { message = "Dieser Benutzername ist bereits vergeben." });
+            }
+
             string passwortHash = BCrypt.Net.BCrypt.HashPassword(request.Password);
 
             var newUser = new User(request.Username, request.Email, passwortHash);
@@ -89,7 +100,7 @@ namespace KVS_API.Controllers
                 issuer: configuration["Jwt:Issuer"],
                 audience: configuration["Jwt:Audience"],
                 claims: claims,
-                expires: DateTime.Now.AddHours(2),
+                expires: DateTime.UtcNow.AddHours(2),
                 signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);

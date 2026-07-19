@@ -22,9 +22,16 @@ namespace KVS_API
             builder.Services.AddOpenApi();
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
-                .EnableSensitiveDataLogging()
-            );
+            {
+                options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+
+                // Zeigt Parameterwerte (echte Daten) im Log - nur waehrend der
+                // Entwicklung, niemals in Produktion.
+                if (builder.Environment.IsDevelopment())
+                {
+                    options.EnableSensitiveDataLogging();
+                }
+            });
 
             builder.Services.AddHostedService<KVS_API.BackgroundServices.AbrechnungsService>();
             builder.Services.AddScoped<IKontoService, KontoService>();

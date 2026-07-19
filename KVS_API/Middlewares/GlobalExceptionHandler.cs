@@ -44,7 +44,13 @@ namespace KVS_API.Middlewares
                 // Für alle anderen "echten" Abstürze (z. B. Datenbank down)
                 httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
                 problemDetails.Title = "Internal server error";
-                problemDetails.Detail = "An unexpected error occurred.";
+                // TEMPORAER (Debugging): echte Fehlerursache mitschicken, damit sie im
+                // Browser sichtbar wird. Nach der Fehlersuche wieder auf eine generische
+                // Meldung zuruecksetzen, damit keine Interna nach aussen gelangen.
+                problemDetails.Detail = $"{exception.GetType().Name}: {exception.Message}"
+                    + (exception.InnerException != null
+                        ? $" | Inner: {exception.InnerException.GetType().Name}: {exception.InnerException.Message}"
+                        : "");
                 problemDetails.Status = StatusCodes.Status500InternalServerError;
             }
 

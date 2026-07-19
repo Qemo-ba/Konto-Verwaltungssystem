@@ -25,8 +25,6 @@ namespace KVS_API
             {
                 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 
-                // Zeigt Parameterwerte (echte Daten) im Log - nur waehrend der
-                // Entwicklung, niemals in Produktion.
                 if (builder.Environment.IsDevelopment())
                 {
                     options.EnableSensitiveDataLogging();

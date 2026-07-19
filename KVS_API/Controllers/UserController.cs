@@ -22,7 +22,6 @@ namespace KVS_API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
-            // Fruehe, klare Rueckmeldung statt eines DB-Absturzes (500) bei Dubletten.
             if (await _context.Users.AnyAsync(u => u.Email == request.Email))
             {
                 return Conflict(new { message = "Diese E-Mail ist bereits registriert." });

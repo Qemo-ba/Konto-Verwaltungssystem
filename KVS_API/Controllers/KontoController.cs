@@ -74,9 +74,6 @@ namespace KVS_API.Controllers
             return NoContent();
         }
 
-        // Liest die User-ID aus dem signierten JWT (Claim "NameIdentifier").
-        // Das ist die einzige vertrauenswuerdige Quelle dafuer, wer der Aufrufer
-        // ist - im Gegensatz zu einer ID aus der URL, die jeder frei waehlen kann.
         private Guid AktuellerUserId()
         {
             var id = User.FindFirstValue(ClaimTypes.NameIdentifier);

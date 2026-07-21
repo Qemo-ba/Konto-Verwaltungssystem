@@ -34,9 +34,6 @@ public class KontoService : IKontoService
     {
         var konto = await _context.Konten.Where(k => k.Kontonummer == kontonummer).FirstOrDefaultAsync();
 
-        // Sicherheit: existiert das Konto nicht ODER gehört es einem anderen User,
-        // antworten wir bewusst identisch ("nicht gefunden"), damit fremde
-        // Kontonummern nicht durch Ausprobieren erraten werden koennen (404).
         if (konto == null || konto.UserId != aktuellerUserId)
         {
             throw new KontoNotFoundException($"Das Konto mit der Kontonummer {kontonummer} existiert nicht.");
@@ -175,8 +172,6 @@ public class KontoService : IKontoService
         var vonkonto = await _context.Konten.Where(k => k.Kontonummer == vonKontonummer).FirstOrDefaultAsync();
         var nachkonto = await _context.Konten.Where(k => k.Kontonummer == nachKontonummer).FirstOrDefaultAsync();
 
-        // Beide Konten muessen dem eingeloggten User gehoeren, sonst koennte man
-        // Geld auf ein fremdes Konto (oder von einem fremden Konto) verschieben.
         if (vonkonto == null || nachkonto == null
             || vonkonto.UserId != aktuellerUserId || nachkonto.UserId != aktuellerUserId)
         {

@@ -1,3 +1,10 @@
+# Visual Studio & build output directories
 .vs/
+[Bb]in/
+[Oo]bj/
 bin/
 obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates

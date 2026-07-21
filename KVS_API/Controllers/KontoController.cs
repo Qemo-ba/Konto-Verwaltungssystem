@@ -12,10 +12,19 @@ namespace KVS_API.Controllers
     public class KontoController : ControllerBase
     {
         private readonly IKontoService _kontoService;
+        private readonly IKontobewegungService _bewegungService;
 
-        public KontoController(IKontoService kontoService)
+        public KontoController(IKontoService kontoService, IKontobewegungService bewegungService)
         {
             _kontoService = kontoService;
+            _bewegungService = bewegungService;
+        }
+
+        [HttpGet("{kontonummer}/bewegungen")]
+        public async Task<IActionResult> GetBewegungen(string kontonummer)
+        {
+            var bewegungen = await _bewegungService.GetBewegungenAsync(kontonummer, AktuellerUserId());
+            return Ok(bewegungen);
         }
 
         [HttpGet("getkonten")]

@@ -33,6 +33,7 @@ namespace KVS_API
 
             builder.Services.AddHostedService<KVS_API.BackgroundServices.AbrechnungsService>();
             builder.Services.AddScoped<IKontoService, KontoService>();
+            builder.Services.AddScoped<IKontobewegungService, KontobewegungService>();
             builder.Services.AddExceptionHandler<KVS_API.Middlewares.GlobalExceptionHandler>();
             builder.Services.AddProblemDetails();
 

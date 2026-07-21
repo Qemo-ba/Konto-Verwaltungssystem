@@ -8,10 +8,12 @@ namespace KVS_API.Services;
 public class KontoService : IKontoService
 {
     private readonly ApplicationDbContext _context;
+    private readonly IKontobewegungService _bewegungService;
 
-    public KontoService(ApplicationDbContext context)
+    public KontoService(ApplicationDbContext context, IKontobewegungService bewegungService)
     {
         _context = context;
+        _bewegungService = bewegungService;
     }
 
     public async Task<IEnumerable<KontoResponse>> GetAlleKontenAsync(Guid userId)
@@ -125,6 +127,14 @@ public class KontoService : IKontoService
         }
 
         konto.Einzahlen(betrag);
+
+        // Bewegung protokollieren (wird zusammen mit der Saldo-Aenderung gespeichert)
+        _bewegungService.Erfasse(
+            konto.Kontonummer,          // welches Konto
+            BewegungsTyp.Einzahlung,    // Art
+            betrag,                     // Betrag
+            konto.GetSaldo(),           // Saldo NACH der Buchung
+            aktuellerUserId);           // wer
 
         await _context.SaveChangesAsync();
 

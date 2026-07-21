@@ -71,6 +71,14 @@ public class KontoService : IKontoService
 
         user.KontoHinzufuegen(sparkonto);
 
+        _bewegungService.Erfasse(
+            sparkonto.Kontonummer,
+            BewegungsTyp.Eroeffnung,
+            sparkonto.GetSaldo(),
+            sparkonto.GetSaldo(),
+            userId
+        );
+
         await _context.SaveChangesAsync();
 
         return new KontoResponse(
@@ -101,6 +109,14 @@ public class KontoService : IKontoService
 
         user.KontoHinzufuegen(privatkonto);
 
+        _bewegungService.Erfasse(
+            privatkonto.Kontonummer,
+            BewegungsTyp.Eroeffnung,
+            privatkonto.GetSaldo(),
+            privatkonto.GetSaldo(),
+            userId
+        );
+
         await _context.SaveChangesAsync();
 
         return new KontoResponse(
@@ -128,13 +144,13 @@ public class KontoService : IKontoService
 
         konto.Einzahlen(betrag);
 
-        // Bewegung protokollieren (wird zusammen mit der Saldo-Aenderung gespeichert)
         _bewegungService.Erfasse(
-            konto.Kontonummer,          // welches Konto
-            BewegungsTyp.Einzahlung,    // Art
-            betrag,                     // Betrag
-            konto.GetSaldo(),           // Saldo NACH der Buchung
-            aktuellerUserId);           // wer
+            konto.Kontonummer,
+            BewegungsTyp.Einzahlung,
+            betrag,
+            konto.GetSaldo(),
+            aktuellerUserId
+        );
 
         await _context.SaveChangesAsync();
 
@@ -167,6 +183,14 @@ public class KontoService : IKontoService
 
         konto.Auszahlen(betrag);
 
+        _bewegungService.Erfasse(
+            konto.Kontonummer,
+            BewegungsTyp.Auszahlung,
+            betrag,
+            konto.GetSaldo(),
+            aktuellerUserId
+        );
+
         await _context.SaveChangesAsync();
 
         return new KontoResponse(
@@ -196,6 +220,25 @@ public class KontoService : IKontoService
         }
 
         user.Umbuchen(vonkonto, nachkonto, betrag);
+
+        _bewegungService.Erfasse(
+            nachkonto.Kontonummer,
+            BewegungsTyp.UmbuchungEingang,
+            betrag,
+            nachkonto.GetSaldo(),
+            aktuellerUserId,
+            vonkonto.Kontonummer
+        );
+
+        _bewegungService.Erfasse(
+            vonkonto.Kontonummer,
+            BewegungsTyp.UmbuchungAusgang,
+            betrag,
+            vonkonto.GetSaldo(),
+            aktuellerUserId,
+            nachkonto.Kontonummer
+        );
+
         await _context.SaveChangesAsync();
 
         return new UmbuchungResponse(
@@ -216,7 +259,15 @@ public class KontoService : IKontoService
         {
             throw new KontoNotFoundException($"Das Konto mit der Kontonummer {kontonummer} existiert nicht.");
         }
-        konto.MonatlicheAbrechnung();
+        var betrag = konto.MonatlicheAbrechnung();
+
+        _bewegungService.Erfasse(
+            konto.Kontonummer,
+            BewegungsTyp.Monatlicheabrechnung,
+            betrag,
+            konto.GetSaldo(),
+            konto.UserId
+        );
 
         await _context.SaveChangesAsync();
 

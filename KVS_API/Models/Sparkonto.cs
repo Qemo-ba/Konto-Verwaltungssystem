@@ -8,10 +8,11 @@ namespace KVS_API.Models
     {
         public Sparkonto() : base("Sparkonto", 50) { }
 
-        public override void MonatlicheAbrechnung()
+        public override decimal MonatlicheAbrechnung()
         {
             decimal gebuehr = GetSaldo() * 0.025m;
             Einzahlen(gebuehr);
+            return gebuehr;
         }
 
     }

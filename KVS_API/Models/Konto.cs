@@ -82,7 +82,7 @@ namespace KVS_API.Models
             return kontonummer;
         }
 
-        public abstract void MonatlicheAbrechnung();
+        public abstract decimal MonatlicheAbrechnung();
 
 
 

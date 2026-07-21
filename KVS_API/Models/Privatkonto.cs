@@ -1,6 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
+
 
 namespace KVS_API.Models
 {
@@ -11,10 +9,11 @@ namespace KVS_API.Models
         {
         }
 
-        public override void MonatlicheAbrechnung()
+        public override decimal MonatlicheAbrechnung()
         {
             decimal gebuehr = GetSaldo() * 0.025m;
             Auszahlen(gebuehr);
+            return gebuehr;
         }
     }
 }
